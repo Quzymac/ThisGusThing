@@ -70,7 +70,7 @@ public class GusMovement : MonoBehaviour {
         graficsObject.transform.Rotate(0,0,180);
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionStay(Collision collision)
     {
         if (collision.transform.tag == ground.tag)
         {
