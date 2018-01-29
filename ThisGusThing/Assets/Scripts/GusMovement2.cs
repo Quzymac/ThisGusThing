@@ -13,7 +13,7 @@ public class GusMovement2 : MonoBehaviour {
     bool facingRight = true;
     [SerializeField] GameObject graficsObject;
 
-    bool doubleJump = false;
+    public bool doubleJump = false;
     [SerializeField] int jumps = 2;
 
 
@@ -23,27 +23,24 @@ public class GusMovement2 : MonoBehaviour {
 	
 	void Update () {
 
-        if (controller.isGrounded )
-        {
-            jumps = 2;
-            verticalVelocity = -gravity * Time.deltaTime;
-            if (Input.GetButton("Jump") && jumps > 0)
+        if (Input.GetButtonDown("Jump") && doubleJump && !controller.isGrounded)
             {
-                jumps--;
-                doubleJump = true;
+                doubleJump = false;
 
+                verticalVelocity = jumpForce;
+            }
+
+        if (controller.isGrounded)
+        {
+            doubleJump = true;
+            verticalVelocity = -gravity * Time.deltaTime;
+            if (Input.GetButtonDown("Jump"))
+            {
                 verticalVelocity = jumpForce;
             }
         }
         else
         {
-            if (Input.GetButton("Jump") && jumps == 1)
-            {
-                jumps--;
-                doubleJump = true;
-
-                verticalVelocity = jumpForce;
-            }
             verticalVelocity -= gravity * Time.deltaTime;
         }
         Vector3 moveVector = Vector3.zero;
@@ -52,13 +49,17 @@ public class GusMovement2 : MonoBehaviour {
         controller.Move(moveVector * Time.deltaTime);
 
 
+        //flip
         float h = Input.GetAxis("Horizontal");
-
-
+        
         if (h > 0 && !facingRight)
+        {
             Flip();
+        }
         else if (h< 0 && facingRight)
+        {
             Flip();
+        } 
 	}
     void Flip()
     {
