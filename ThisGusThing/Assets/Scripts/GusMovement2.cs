@@ -53,7 +53,7 @@ public class GusMovement2 : MonoBehaviour {
         if ((controller.collisionFlags == CollisionFlags.Above)) 
         {
             verticalVelocity = 0;
-            verticalVelocity -= gravity * Time.deltaTime;
+            verticalVelocity -= gravity * Time.deltaTime * 3;
 
         }
         //snabb fix för att gus inte ska fastna när han hoppar upp i hörn
