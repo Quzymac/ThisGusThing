@@ -12,6 +12,7 @@ public class GusMovement2 : MonoBehaviour {
     [SerializeField] float moveSpeed = 10.0f;
     bool facingRight = true;
     [SerializeField] GameObject graficsObject;
+    [SerializeField] float fallMultiplier = 2.5f;   
 
     public bool doubleJump = false;
 
@@ -24,7 +25,6 @@ public class GusMovement2 : MonoBehaviour {
         if (Input.GetButtonDown("Jump") && doubleJump && !controller.isGrounded)
             {
                 doubleJump = false;
-
                 verticalVelocity = jumpForce;
             }
 
@@ -48,13 +48,13 @@ public class GusMovement2 : MonoBehaviour {
         //snabb fix för att gus inte ska fastna när han hoppar upp i hörn
         if ((((controller.collisionFlags & CollisionFlags.Above) != 0) && (controller.collisionFlags & CollisionFlags.Sides) != 0))
         {
-                verticalVelocity = 0;
-                verticalVelocity -= gravity * Time.deltaTime *7;
+            verticalVelocity = 0;
+            verticalVelocity -= gravity * Time.deltaTime * 7;
         }
 
         else
         {
-            verticalVelocity -= gravity * Time.deltaTime;
+            verticalVelocity -= gravity * (fallMultiplier - 1) * Time.deltaTime;
         }
         Vector3 moveVector = Vector3.zero;
         moveVector.x = Input.GetAxis("Horizontal") * moveSpeed;
