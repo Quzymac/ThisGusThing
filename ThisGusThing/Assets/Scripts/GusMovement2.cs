@@ -16,22 +16,33 @@ public class GusMovement2 : MonoBehaviour {
     [SerializeField] GameObject JumpDownGFX;
     [SerializeField] GameObject JumpUpGFX;
 
+    //Audio
+    AudioSource moveSFX;     [SerializeField] AudioClip jumpAudio;     [SerializeField] AudioClip doubleJumpAudio;     [SerializeField] AudioClip landAudio; 
 
     [SerializeField] float fallMultiplier = 2.5f;   
 
+
     public bool doubleJump = false;
+    bool isFalling = false;
 
     void Start () {
         controller = GetComponent<CharacterController>();
+        moveSFX = GetComponent<AudioSource>();
 	}
 	
 	void Update () {
+        //Snabbfix: Sätter isFalling till true för att ljud ska spelas om man landar från ett fall utan att ha hoppat.
+        if (verticalVelocity < -2.5f)         {             isFalling = true;         }
+
+        if (controller.isGrounded && isFalling)         {             moveSFX.clip = landAudio;             moveSFX.Play();             isFalling = false;         }
 
         if (Input.GetButtonDown("Jump") && doubleJump && !controller.isGrounded)
             {
+                moveSFX.clip = doubleJumpAudio;
+                moveSFX.Play();
+                isFalling = true;
                 doubleJump = false;
                 verticalVelocity = jumpForce;
-            
             }
 
         if (controller.isGrounded)
@@ -45,6 +56,8 @@ public class GusMovement2 : MonoBehaviour {
             {
                 graficsObject.SetActive(false);
                 JumpGFX.SetActive(true);
+                moveSFX.clip = jumpAudio;                 moveSFX.Play();                 isFalling = true;
+
                 verticalVelocity = jumpForce;
             }
         }
