@@ -23,6 +23,7 @@ public class GusMovement2 : MonoBehaviour {
 	
 	void Update () {
 
+        print(verticalVelocity);
         if (Input.GetButtonDown("Jump") && doubleJump && !controller.isGrounded)
             {
                 doubleJump = false;
@@ -32,12 +33,24 @@ public class GusMovement2 : MonoBehaviour {
 
         if (controller.isGrounded)
         {
+            
             doubleJump = true;
             verticalVelocity = -gravity * Time.deltaTime;
             if (Input.GetButtonDown("Jump"))
             {
                 verticalVelocity = jumpForce;
             }
+        }
+        if ((controller.collisionFlags == CollisionFlags.Above))
+        {
+            print("coll");
+            verticalVelocity = 0;
+            verticalVelocity -= gravity * Time.deltaTime;
+
+        }
+        if ((controller.collisionFlags & CollisionFlags.Sides) != 0)
+        {
+            verticalVelocity -= gravity * Time.deltaTime;
         }
         else
         {
