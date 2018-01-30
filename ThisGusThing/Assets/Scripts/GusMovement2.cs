@@ -14,8 +14,6 @@ public class GusMovement2 : MonoBehaviour {
     [SerializeField] GameObject graficsObject;
 
     public bool doubleJump = false;
-    [SerializeField] int jumps = 2;
-
 
     void Start () {
         controller = GetComponent<CharacterController>();
@@ -23,7 +21,6 @@ public class GusMovement2 : MonoBehaviour {
 	
 	void Update () {
 
-        print(verticalVelocity);
         if (Input.GetButtonDown("Jump") && doubleJump && !controller.isGrounded)
             {
                 doubleJump = false;
@@ -33,7 +30,7 @@ public class GusMovement2 : MonoBehaviour {
 
         if (controller.isGrounded)
         {
-            
+
             doubleJump = true;
             verticalVelocity = -gravity * Time.deltaTime;
             if (Input.GetButtonDown("Jump"))
@@ -41,17 +38,20 @@ public class GusMovement2 : MonoBehaviour {
                 verticalVelocity = jumpForce;
             }
         }
-        if ((controller.collisionFlags == CollisionFlags.Above))
+        //gör att gus inte fastnar i taket när han hoppar
+        if ((controller.collisionFlags == CollisionFlags.Above)) 
         {
-            print("coll");
             verticalVelocity = 0;
             verticalVelocity -= gravity * Time.deltaTime;
 
         }
-        if ((controller.collisionFlags & CollisionFlags.Sides) != 0)
+        //snabb fix för att gus inte ska fastna när han hoppar upp i hörn
+        if ((((controller.collisionFlags & CollisionFlags.Above) != 0) && (controller.collisionFlags & CollisionFlags.Sides) != 0))
         {
-            verticalVelocity -= gravity * Time.deltaTime;
+                verticalVelocity = 0;
+                verticalVelocity -= gravity * Time.deltaTime *7;
         }
+
         else
         {
             verticalVelocity -= gravity * Time.deltaTime;
@@ -62,7 +62,7 @@ public class GusMovement2 : MonoBehaviour {
         controller.Move(moveVector * Time.deltaTime);
 
 
-        //flip
+        //flip modell
         float h = Input.GetAxis("Horizontal");
         
         if (h > 0 && !facingRight)
@@ -77,6 +77,6 @@ public class GusMovement2 : MonoBehaviour {
     void Flip()
     {
         facingRight = !facingRight;
-        graficsObject.transform.Rotate(0, 0, 180);
+        graficsObject.transform.Rotate(0, 180, 0);
     }
 }
