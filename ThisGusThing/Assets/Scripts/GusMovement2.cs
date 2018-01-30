@@ -12,6 +12,11 @@ public class GusMovement2 : MonoBehaviour {
     [SerializeField] float moveSpeed = 10.0f;
     bool facingRight = true;
     [SerializeField] GameObject graficsObject;
+    [SerializeField] GameObject JumpGFX;
+    [SerializeField] GameObject JumpDownGFX;
+    [SerializeField] GameObject JumpUpGFX;
+
+
     [SerializeField] float fallMultiplier = 2.5f;   
 
     public bool doubleJump = false;
@@ -26,18 +31,24 @@ public class GusMovement2 : MonoBehaviour {
             {
                 doubleJump = false;
                 verticalVelocity = jumpForce;
+            
             }
 
         if (controller.isGrounded)
         {
+            graficsObject.SetActive(true);
+            JumpGFX.SetActive(false);
 
             doubleJump = true;
             verticalVelocity = -gravity * Time.deltaTime;
             if (Input.GetButtonDown("Jump"))
             {
+                graficsObject.SetActive(false);
+                JumpGFX.SetActive(true);
                 verticalVelocity = jumpForce;
             }
         }
+
         //gör att gus inte fastnar i taket när han hoppar
         if ((controller.collisionFlags == CollisionFlags.Above)) 
         {
@@ -72,11 +83,30 @@ public class GusMovement2 : MonoBehaviour {
         else if (h< 0 && facingRight)
         {
             Flip();
-        } 
-	}
+        }
+        
+        if (JumpGFX.activeInHierarchy && verticalVelocity < 0)
+        {
+            JumpUpGFX.SetActive(false);
+            JumpDownGFX.SetActive(true);
+        }
+        else if (JumpGFX.activeInHierarchy && verticalVelocity > 0)
+        {
+            JumpUpGFX.SetActive(true);
+            JumpDownGFX.SetActive(false);
+        }
+        else if(graficsObject.activeInHierarchy && verticalVelocity < -1.5f)
+        {
+            graficsObject.SetActive(false);
+            JumpGFX.SetActive(true);
+        }
+    }
     void Flip()
     {
         facingRight = !facingRight;
         graficsObject.transform.Rotate(0, 180, 0);
+        JumpGFX.transform.Rotate(0, 180, 0);
+
+
     }
 }
