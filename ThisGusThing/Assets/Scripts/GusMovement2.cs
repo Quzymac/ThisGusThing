@@ -2,68 +2,102 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GusMovement2 : MonoBehaviour {
+public class GusMovement2 : MonoBehaviour
+{
 
     CharacterController controller;
 
-    [SerializeField] float verticalVelocity;
+    [Header("Physics")]
+    [SerializeField]
+    float verticalVelocity;
     [SerializeField] float gravity = 14.0f;
     [SerializeField] float jumpForce = 10.0f;
     [SerializeField] float moveSpeed = 10.0f;
-    bool facingRight = true;
-    [SerializeField] GameObject graficsObject;
+    [SerializeField] float fallMultiplier = 2.5f;
+
+    [Header("GameObjects")]
+    [SerializeField] GameObject playerModel;
+    [SerializeField] GameObject defaultModel;
     [SerializeField] GameObject JumpGFX;
     [SerializeField] GameObject JumpDownGFX;
     [SerializeField] GameObject JumpUpGFX;
 
-    //Audio
-    AudioSource moveSFX;     [SerializeField] AudioClip jumpAudio;     [SerializeField] AudioClip doubleJumpAudio;     [SerializeField] AudioClip landAudio; 
+    [Header("Audio")]
+    AudioSource moveSFX;
+    [SerializeField] AudioClip jumpAudio;
+    [SerializeField] AudioClip doubleJumpAudio;
+    [SerializeField] AudioClip landAudio;
 
-    [SerializeField] float fallMultiplier = 2.5f;   
 
+    float rotationTime;
+    Quaternion targetRotation;
+    float rotationSpeed = 1f;
+    bool rotating = false;
 
+    bool facingRight = true;
     public bool doubleJump = false;
     bool isFalling = false;
 
-    void Start () {
+    void Start()
+    {
         controller = GetComponent<CharacterController>();
         moveSFX = GetComponent<AudioSource>();
-	}
-	
-	void Update () {
-        //Snabbfix: Sätter isFalling till true för att ljud ska spelas om man landar från ett fall utan att ha hoppat.
-        if (verticalVelocity < -2.5f)         {             isFalling = true;         }
+    }
 
-        if (controller.isGrounded && isFalling)         {             moveSFX.clip = landAudio;             moveSFX.Play();             isFalling = false;         }
+    void Update()
+    {
+        //Snabbfix: Sätter isFalling till true för att ljud ska spelas om man landar från ett fall utan att ha hoppat.
+        if (Input.GetButton("Fire3"))
+        {
+            moveSpeed = 20f;
+        }
+        else
+        {
+            moveSpeed = 10f;
+        }
+
+        if (verticalVelocity < -2.5f)
+        {
+            isFalling = true;
+        }
+
+        if (controller.isGrounded && isFalling)
+        {
+            moveSFX.clip = landAudio;
+            moveSFX.Play();
+            isFalling = false;
+        }
 
         if (Input.GetButtonDown("Jump") && doubleJump && !controller.isGrounded)
-            {
-                moveSFX.clip = doubleJumpAudio;
-                moveSFX.Play();
-                isFalling = true;
-                doubleJump = false;
-                verticalVelocity = jumpForce;
-            }
+        {
+            moveSFX.clip = doubleJumpAudio;
+            moveSFX.Play();
+            isFalling = true;
+            doubleJump = false;
+            verticalVelocity = jumpForce;
+        }
 
         if (controller.isGrounded)
         {
-            graficsObject.SetActive(true);
+            defaultModel.SetActive(true);
             JumpGFX.SetActive(false);
 
             doubleJump = true;
             verticalVelocity = -gravity * Time.deltaTime;
             if (Input.GetButtonDown("Jump"))
             {
-                graficsObject.SetActive(false);
+                defaultModel.SetActive(false);
                 JumpGFX.SetActive(true);
-                moveSFX.clip = jumpAudio;                 moveSFX.Play();                 isFalling = true;
+                moveSFX.clip = jumpAudio;
+                moveSFX.Play();
+                isFalling = true;
 
                 verticalVelocity = jumpForce;
             }
         }
 
         //gör att gus inte fastnar i taket när han hoppar
-        if ((controller.collisionFlags == CollisionFlags.Above)) 
+        if ((controller.collisionFlags == CollisionFlags.Above))
         {
             verticalVelocity = 0;
             verticalVelocity -= gravity * Time.deltaTime * 3;
@@ -80,25 +114,43 @@ public class GusMovement2 : MonoBehaviour {
         {
             verticalVelocity -= gravity * (fallMultiplier - 1) * Time.deltaTime;
         }
+
         Vector3 moveVector = Vector3.zero;
         moveVector.x = Input.GetAxis("Horizontal") * moveSpeed;
         moveVector.y = verticalVelocity;
         controller.Move(moveVector * Time.deltaTime);
 
-
-        //flip modell
         float h = Input.GetAxis("Horizontal");
-        
-        if (h > 0 && !facingRight)
+
+        if (h > 0 && !facingRight) //d
         {
-            Flip();
+            targetRotation = Quaternion.Euler(0, 0, 0);
+            facingRight = true;
+            rotating = true;
+            rotationTime = 0;
         }
-        else if (h< 0 && facingRight)
+
+        else if (h < 0 && facingRight) //a
         {
-            Flip();
+            targetRotation = Quaternion.Euler(0, -180, 0);
+            facingRight = false;
+            rotating = true;
+            rotationTime = 0;
         }
+
+        if (rotating)
+        {
+            rotationTime += Time.deltaTime * rotationSpeed;
+            playerModel.transform.rotation = Quaternion.Lerp(playerModel.transform.rotation, targetRotation, rotationTime);
+
+            if (rotationTime > 1)
+            {
+                rotating = false;
+            }
+        }
+
         
-        if (JumpGFX.activeInHierarchy && verticalVelocity < 0)
+        if (JumpGFX.activeInHierarchy && verticalVelocity< 0)
         {
             JumpUpGFX.SetActive(false);
             JumpDownGFX.SetActive(true);
@@ -108,18 +160,10 @@ public class GusMovement2 : MonoBehaviour {
             JumpUpGFX.SetActive(true);
             JumpDownGFX.SetActive(false);
         }
-        else if(graficsObject.activeInHierarchy && verticalVelocity < -1.5f)
+        else if(playerModel.activeInHierarchy && verticalVelocity< -1.5f)
         {
-            graficsObject.SetActive(false);
+            defaultModel.SetActive(false);
             JumpGFX.SetActive(true);
         }
-    }
-    void Flip()
-    {
-        facingRight = !facingRight;
-        graficsObject.transform.Rotate(0, 180, 0);
-        JumpGFX.transform.Rotate(0, 180, 0);
-
-
     }
 }
