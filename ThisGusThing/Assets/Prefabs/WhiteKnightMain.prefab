@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1691139278351336}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.92, y: -3.89, z: 0}
+  m_LocalPosition: {x: 27.78, y: -7.29, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4804135853450348}
@@ -68,8 +68,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1886693219769988}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 30, y: 30, z: 30}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4162118858236946}
   m_RootOrder: 0
@@ -88,7 +88,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2b311280a3de4794caddfc589fb1da81, type: 2}
+  - {fileID: 2100000, guid: 4edf551c43d1513469d0923ad128b351, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -114,7 +114,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1886693219769988}
-  m_Mesh: {fileID: 4300000, guid: aafc18d5ef7976d4596a4e82f09dda5c, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 69d3b777abcf5194aa4388b8b4acbea9, type: 3}
 --- !u!54 &54600425543848190
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -128,7 +128,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 88
   m_CollisionDetection: 0
 --- !u!95 &95117732132215482
 Animator:
@@ -138,8 +138,8 @@ Animator:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1886693219769988}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: aafc18d5ef7976d4596a4e82f09dda5c, type: 3}
-  m_Controller: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 69d3b777abcf5194aa4388b8b4acbea9, type: 3}
+  m_Controller: {fileID: 9100000, guid: 5c36169a7706e7e42832f464f51df2b2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -159,6 +159,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 5
+  ground: {fileID: 1965354756353486, guid: ea27eb5326616124eac97a4755f5d845, type: 2}
+  groundSlope: {fileID: 1626666718152188, guid: b8276d69dcd5e0649ad712451ded392d,
+    type: 2}
 --- !u!135 &135644017952193508
 SphereCollider:
   m_ObjectHideFlags: 1

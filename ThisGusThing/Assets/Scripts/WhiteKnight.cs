@@ -6,15 +6,12 @@ public class WhiteKnight : MonoBehaviour {
 
     [SerializeField] float MoveSpeed = 5f;
 
-	void Update () {
+    void Update () {
         transform.Translate(Time.deltaTime * MoveSpeed ,  0 , 0);
 	}
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ground"))
-        {
-            Rotate();
-        }
+         Rotate();
     }
     void Rotate()
     {
