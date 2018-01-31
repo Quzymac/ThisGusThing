@@ -16,12 +16,11 @@ public class MutationManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
     //Tier1
@@ -56,6 +55,7 @@ public class MutationManager : MonoBehaviour {
     public void PickUpMutationCurrency()
     {
         mutationCurrency++;
+        print(mutationCurrency);
     }
 
 }
