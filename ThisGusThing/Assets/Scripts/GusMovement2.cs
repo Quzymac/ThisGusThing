@@ -14,6 +14,7 @@ public class GusMovement2 : MonoBehaviour
     [SerializeField] float jumpForce = 10.0f;
     [SerializeField] float moveSpeed = 10.0f;
     [SerializeField] float fallMultiplier = 2.5f;
+    bool isFalling = false;
 
     [Header("GameObjects")]
     [SerializeField] GameObject playerModel;
@@ -28,15 +29,17 @@ public class GusMovement2 : MonoBehaviour
     [SerializeField] AudioClip doubleJumpAudio;
     [SerializeField] AudioClip landAudio;
 
-
+    //Rotations
     float rotationTime;
     Quaternion targetRotation;
     float rotationSpeed = 1f;
     bool rotating = false;
-
     bool facingRight = true;
-    public bool doubleJump = false;
-    bool isFalling = false;
+
+    [Header("PowerUps")]
+    bool doubleJump = false;
+    [SerializeField] bool doubleJumpActive = false;
+
 
     void Start()
     {
@@ -68,7 +71,7 @@ public class GusMovement2 : MonoBehaviour
             isFalling = false;
         }
 
-        if (Input.GetButtonDown("Jump") && doubleJump && !controller.isGrounded)
+        if (Input.GetButtonDown("Jump") && doubleJump && !controller.isGrounded && doubleJumpActive)
         {
             moveSFX.clip = doubleJumpAudio;
             moveSFX.Play();
@@ -148,7 +151,6 @@ public class GusMovement2 : MonoBehaviour
                 rotating = false;
             }
         }
-
         
         if (JumpGFX.activeInHierarchy && verticalVelocity< 0)
         {
@@ -165,5 +167,10 @@ public class GusMovement2 : MonoBehaviour
             defaultModel.SetActive(false);
             JumpGFX.SetActive(true);
         }
+    }
+
+    public void SetDoubleJumpActive()
+    {
+        doubleJumpActive = true;
     }
 }
