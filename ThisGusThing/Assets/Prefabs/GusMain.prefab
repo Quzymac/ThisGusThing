@@ -34,6 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4288578527100388}
+  - component: {fileID: 114161564993763480}
   - component: {fileID: 54959930607346170}
   - component: {fileID: 114315729558414382}
   - component: {fileID: 135238446440146508}
@@ -525,6 +526,21 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114161564993763480
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1339314599898756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f92512b04b5dcc469fd563420a68cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mutationCurrency: 3
+  doubleJump: 0
+  tripleJump: 0
+  superSpeed: 0
 --- !u!114 &114308666237351248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -561,7 +577,7 @@ MonoBehaviour:
   jumpAudio: {fileID: 8300000, guid: dc4e6c5ded10e46d49d6902c469f30a8, type: 3}
   doubleJumpAudio: {fileID: 8300000, guid: d94797f4da6ca4b72b7b34a37d37ddcd, type: 3}
   landAudio: {fileID: 8300000, guid: 85575e38fe35d49718bd0469f0facdbd, type: 3}
-  doubleJumpActive: 0
+  mutations: {fileID: 0}
 --- !u!124 &124425136725772422
 Behaviour:
   m_ObjectHideFlags: 1
