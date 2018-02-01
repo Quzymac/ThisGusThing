@@ -37,6 +37,10 @@ public class GusMovement2 : MonoBehaviour
     bool facingRight = true;
 
     [Header("PowerUps")]
+
+    public int airJumps = 0;
+    public int maxAirJumps = 0;
+
     bool doubleJump = true;
 
 
@@ -72,12 +76,13 @@ public class GusMovement2 : MonoBehaviour
             isFalling = false;
         }
 
-        if (Input.GetButtonDown("Jump") && doubleJump && !controller.isGrounded && mutations.DoubleJump)
+        if (Input.GetButtonDown("Jump") && airJumps > 0 && !controller.isGrounded)
         {
             moveSFX.clip = doubleJumpAudio;
             moveSFX.Play();
             isFalling = true;
             doubleJump = false;
+            airJumps--;
             verticalVelocity = jumpForce;
         }
 
@@ -87,6 +92,9 @@ public class GusMovement2 : MonoBehaviour
             JumpGFX.SetActive(false);
 
             doubleJump = true;
+            airJumps = maxAirJumps;
+
+
             verticalVelocity = -gravity * Time.deltaTime;
             if (Input.GetButtonDown("Jump"))
             {
@@ -168,5 +176,9 @@ public class GusMovement2 : MonoBehaviour
             defaultModel.SetActive(false);
             JumpGFX.SetActive(true);
         }
+    }
+    public void SetAirJumps(int jumps)
+    {
+        maxAirJumps = jumps;
     }
 }

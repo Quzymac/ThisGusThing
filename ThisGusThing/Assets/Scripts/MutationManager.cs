@@ -5,6 +5,7 @@ using UnityEngine;
 public class MutationManager : MonoBehaviour {
 
     [SerializeField] int mutationCurrency = 3;
+    [SerializeField] GameObject gus;
 
     [Header("Tier1Ability")]
     [SerializeField] bool doubleJump = false;
@@ -12,6 +13,11 @@ public class MutationManager : MonoBehaviour {
     [Header("Tier2Ability")]
     [SerializeField] bool tripleJump = false;
     [SerializeField] bool superSpeed = false;
+
+    [Header("TierUpgraded")]
+    [SerializeField] bool tier1Upgraded = false;
+    [SerializeField] bool tier2Upgraded = false;
+    
 
 
     public bool DoubleJump
@@ -39,10 +45,17 @@ public class MutationManager : MonoBehaviour {
     {
         if (doubleJump)
         { return; }
-        if(mutationCurrency > 0 && (!tripleJump || !superSpeed))
+        if(mutationCurrency > 0 && !tier1Upgraded && !tier2Upgraded)
         {
-            doubleJump = true;
-            mutationCurrency--;
+            gus.GetComponent<GusMovement2>().SetAirJumps(1);
+            if (!doubleJump)
+            {
+                mutationCurrency--;
+                doubleJump = true;
+                tier1Upgraded = true;
+            }
+            
+
         }
     }
 
@@ -51,10 +64,17 @@ public class MutationManager : MonoBehaviour {
     {
         if(tripleJump)
         { return; }
-        if (mutationCurrency > 0 && doubleJump && !superSpeed) // && check for tier3
+        if ((mutationCurrency > 0 && tier1Upgraded) || tier2Upgraded) // && check for tier3
         {
+            gus.GetComponent<GusMovement2>().SetAirJumps(2);
             tripleJump = true;
-            mutationCurrency--;
+            superSpeed = false;
+
+            if (!tier2Upgraded)
+            {
+                mutationCurrency--;
+                tier2Upgraded = true;
+            }
         }
     }
 
@@ -62,10 +82,17 @@ public class MutationManager : MonoBehaviour {
     {
         if (superSpeed)
         { return; }
-        if (mutationCurrency > 0 && doubleJump && !tripleJump) // && check for tier3
+        if ((mutationCurrency > 0 && tier1Upgraded) || tier2Upgraded) // && check for tier3
         {
             superSpeed = true;
-            mutationCurrency--;
+            tripleJump = false;
+            gus.GetComponent<GusMovement2>().SetAirJumps(1);
+
+            if (!tier2Upgraded)
+            {
+                mutationCurrency--;
+                tier2Upgraded = true;
+            }
         }
     }
 
