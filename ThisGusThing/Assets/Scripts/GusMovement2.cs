@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,7 +49,6 @@ public class GusMovement2 : MonoBehaviour
 
     void Start()
     {
-        mutations = GetComponent<MutationManager>();
         controller = GetComponent<CharacterController>();
         moveSFX = GetComponent<AudioSource>();
     }

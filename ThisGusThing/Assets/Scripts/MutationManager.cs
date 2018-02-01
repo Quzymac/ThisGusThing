@@ -1,8 +1,12 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MutationManager : MonoBehaviour {
+
+    //Borde denna vara här...? Oklart.
+    [SerializeField] Text currencyTextBox;
 
     [SerializeField] int mutationCurrency = 3;
     [SerializeField] GameObject gus;
@@ -17,8 +21,12 @@ public class MutationManager : MonoBehaviour {
     [Header("TierUpgraded")]
     [SerializeField] bool tier1Upgraded = false;
     [SerializeField] bool tier2Upgraded = false;
-    
 
+    private void Start()
+    {
+        currencyTextBox.text = mutationCurrency.ToString();
+
+    }
 
     public bool DoubleJump
     {
@@ -51,11 +59,10 @@ public class MutationManager : MonoBehaviour {
             if (!doubleJump)
             {
                 mutationCurrency--;
+                currencyTextBox.text = mutationCurrency.ToString();
                 doubleJump = true;
                 tier1Upgraded = true;
             }
-            
-
         }
     }
 
@@ -73,6 +80,7 @@ public class MutationManager : MonoBehaviour {
             if (!tier2Upgraded)
             {
                 mutationCurrency--;
+                currencyTextBox.text = mutationCurrency.ToString();
                 tier2Upgraded = true;
             }
         }
@@ -91,6 +99,7 @@ public class MutationManager : MonoBehaviour {
             if (!tier2Upgraded)
             {
                 mutationCurrency--;
+                currencyTextBox.text = mutationCurrency.ToString();
                 tier2Upgraded = true;
             }
         }
@@ -99,7 +108,7 @@ public class MutationManager : MonoBehaviour {
     public void PickUpMutationCurrency()
     {
         mutationCurrency++;
-        print(mutationCurrency);
+        currencyTextBox.text = mutationCurrency.ToString();
     }
 
 }
