@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4138022226244738}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: JumpGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,12 +34,14 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4288578527100388}
+  - component: {fileID: 114161564993763480}
   - component: {fileID: 54959930607346170}
   - component: {fileID: 114315729558414382}
   - component: {fileID: 135238446440146508}
   - component: {fileID: 143874440387493948}
   - component: {fileID: 82386444803362712}
-  m_Layer: 0
+  - component: {fileID: 114308666237351248}
+  m_Layer: 2
   m_Name: GusMain
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -57,7 +59,7 @@ GameObject:
   - component: {fileID: 20659193746747070}
   - component: {fileID: 124425136725772422}
   - component: {fileID: 81163595768088618}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -72,7 +74,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4142220765547168}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: playerModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,8 +91,7 @@ GameObject:
   - component: {fileID: 4619999954282916}
   - component: {fileID: 33133804172403214}
   - component: {fileID: 23814560185193392}
-  - component: {fileID: 95671962469986530}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GusGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +109,7 @@ GameObject:
   - component: {fileID: 33444787281189720}
   - component: {fileID: 23422954223168142}
   - component: {fileID: 95596418629306658}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Gus1.0_JumpUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +127,7 @@ GameObject:
   - component: {fileID: 33683702587674722}
   - component: {fileID: 23487883893586714}
   - component: {fileID: 95079928563144650}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Gus1.0_JumpDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +171,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1339314599898756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.64, y: 2.34, z: 0}
+  m_LocalPosition: {x: -18, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4507725791732050}
@@ -374,7 +375,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1676650354514770}
-  m_Mesh: {fileID: 4300000, guid: 833a7ad9bf0ec85488b6bdb19f0f8d39, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 34292c68cdd52b94f9bd9ea28be42948, type: 3}
 --- !u!33 &33444787281189720
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -525,23 +526,33 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &95671962469986530
-Animator:
-  serializedVersion: 3
+--- !u!114 &114161564993763480
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1676650354514770}
+  m_GameObject: {fileID: 1339314599898756}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 833a7ad9bf0ec85488b6bdb19f0f8d39, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f92512b04b5dcc469fd563420a68cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mutationCurrency: 3
+  doubleJump: 0
+  tripleJump: 0
+  superSpeed: 0
+--- !u!114 &114308666237351248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1339314599898756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 514c95076710d964e96362c1f6023d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPoint: {fileID: 0}
 --- !u!114 &114315729558414382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -566,7 +577,7 @@ MonoBehaviour:
   jumpAudio: {fileID: 8300000, guid: dc4e6c5ded10e46d49d6902c469f30a8, type: 3}
   doubleJumpAudio: {fileID: 8300000, guid: d94797f4da6ca4b72b7b34a37d37ddcd, type: 3}
   landAudio: {fileID: 8300000, guid: 85575e38fe35d49718bd0469f0facdbd, type: 3}
-  doubleJump: 0
+  mutations: {fileID: 0}
 --- !u!124 &124425136725772422
 Behaviour:
   m_ObjectHideFlags: 1
