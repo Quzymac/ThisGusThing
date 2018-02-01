@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4162118858236946}
   - component: {fileID: 135644017952193508}
   - component: {fileID: 114340971306171476}
-  - component: {fileID: 54176738064341258}
+  - component: {fileID: 54600425543848190}
   m_Layer: 0
   m_Name: WhiteKnightMain
-  m_TagString: Danger
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +115,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1886693219769988}
   m_Mesh: {fileID: 4300000, guid: 69d3b777abcf5194aa4388b8b4acbea9, type: 3}
---- !u!54 &54176738064341258
+--- !u!54 &54600425543848190
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -126,9 +126,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 88
   m_CollisionDetection: 0
 --- !u!95 &95117732132215482
 Animator:

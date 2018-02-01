@@ -4,42 +4,29 @@ using UnityEngine;
 
 public class MutationManager : MonoBehaviour {
 
-    [SerializeField] int mutationCurrency = 3;
+    [SerializeField] int mutationCurrency = 1;
 
     [Header("Tier1Ability")]
     [SerializeField] bool doubleJump = false;
 
     [Header("Tier2Ability")]
-    [SerializeField] bool tripleJump = false;
+    [SerializeField] bool trippleJump = false;
     [SerializeField] bool superSpeed = false;
 
 
-    public bool DoubleJump
-    {
-        get{
-            return doubleJump;
-        }
-        private set{
-            doubleJump = value;
-        }
-    }
+    // Use this for initialization
+    void Start () {
 
-    public bool SuperSpeed
-    {
-        get{
-            return superSpeed;
-        }
-        private set{
-            superSpeed = value;
-        }
-    }
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	}
 
     //Tier1
     public void ActivateDoubleJump()
     {
-        if (doubleJump)
-        { return; }
-        if(mutationCurrency > 0 && (!tripleJump || !superSpeed))
+        if(mutationCurrency > 0 && (!trippleJump || !superSpeed))
         {
             doubleJump = true;
             mutationCurrency--;
@@ -47,22 +34,18 @@ public class MutationManager : MonoBehaviour {
     }
 
     //Tier2
-    public void ActivateTripleJump()
+    public void ActivateTrippleJump()
     {
-        if(tripleJump)
-        { return; }
         if (mutationCurrency > 0 && doubleJump && !superSpeed) // && check for tier3
         {
-            tripleJump = true;
+            trippleJump = true;
             mutationCurrency--;
         }
     }
 
     public void ActivateSuperSpeed()
     {
-        if (superSpeed)
-        { return; }
-        if (mutationCurrency > 0 && doubleJump && !tripleJump) // && check for tier3
+        if (mutationCurrency > 0 && doubleJump && !trippleJump) // && check for tier3
         {
             superSpeed = true;
             mutationCurrency--;

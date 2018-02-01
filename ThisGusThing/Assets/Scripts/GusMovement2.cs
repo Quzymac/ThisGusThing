@@ -37,27 +37,26 @@ public class GusMovement2 : MonoBehaviour
     bool facingRight = true;
 
     [Header("PowerUps")]
-    bool doubleJump = true;
-
-
-    [SerializeField] MutationManager mutations;
+    bool doubleJump = false;
+    [SerializeField] bool doubleJumpActive = false;
 
 
     void Start()
     {
-        mutations = GetComponent<MutationManager>();
         controller = GetComponent<CharacterController>();
         moveSFX = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        if(mutations.SuperSpeed)
+        //Snabbfix: Sätter isFalling till true för att ljud ska spelas om man landar från ett fall utan att ha hoppat.
+        if (Input.GetButton("Fire3"))
         {
-            if (Input.GetButton("Fire3"))
-                moveSpeed = 20f;
-            else
-                moveSpeed = 10f;
+            moveSpeed = 20f;
+        }
+        else
+        {
+            moveSpeed = 10f;
         }
 
         if (verticalVelocity < -2.5f)
@@ -72,7 +71,7 @@ public class GusMovement2 : MonoBehaviour
             isFalling = false;
         }
 
-        if (Input.GetButtonDown("Jump") && doubleJump && !controller.isGrounded && mutations.DoubleJump)
+        if (Input.GetButtonDown("Jump") && doubleJump && !controller.isGrounded && doubleJumpActive)
         {
             moveSFX.clip = doubleJumpAudio;
             moveSFX.Play();
@@ -168,5 +167,10 @@ public class GusMovement2 : MonoBehaviour
             defaultModel.SetActive(false);
             JumpGFX.SetActive(true);
         }
+    }
+
+    public void SetDoubleJumpActive()
+    {
+        doubleJumpActive = true;
     }
 }
