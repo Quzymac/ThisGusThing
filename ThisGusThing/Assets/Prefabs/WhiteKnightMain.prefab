@@ -158,10 +158,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ffeee89cfb94c245bf9bab13c479885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 5
-  ground: {fileID: 1965354756353486, guid: ea27eb5326616124eac97a4755f5d845, type: 2}
-  groundSlope: {fileID: 1626666718152188, guid: b8276d69dcd5e0649ad712451ded392d,
-    type: 2}
+  moveSpeed: 5
+  raycastLength: 1.3
+  graficsModel: {fileID: 1886693219769988}
+  rotationSpeed: 1
 --- !u!135 &135644017952193508
 SphereCollider:
   m_ObjectHideFlags: 1
