@@ -5,8 +5,8 @@ using UnityEngine;
 public class GusDeath : MonoBehaviour
     {
     [Header("My Checkpoint")]
-    [SerializeField]
-    public GameObject checkPoint;
+    [SerializeField] GameObject checkPoint;
+    [SerializeField] GameObject gus;
 
     Vector3 checkPointCoordinates;
 
@@ -14,13 +14,16 @@ public class GusDeath : MonoBehaviour
     {
         checkPointCoordinates = checkPoint.transform.position;
     }
+   
 
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Danger")
         {
             print("DANGER DANGER!");
-            Death();
+            gus.GetComponent<Rigidbody>().isKinematic = true;
+            gus.GetComponent<GusMovement2>().enabled = false;
+            StartCoroutine(Die());
         }
 
         if (col.gameObject.tag == "Checkpoint")
@@ -29,10 +32,15 @@ public class GusDeath : MonoBehaviour
             print("New checkpoint!" + checkPointCoordinates);
         }
     }
-
-    void Death()
+   IEnumerator Die()
     {
+        yield return new WaitForSeconds(3);
+        
         this.transform.position = checkPointCoordinates;
-    }
+        gus.GetComponent<Rigidbody>().isKinematic = false;
+        gus.GetComponent<GusMovement2>().enabled = true;
 
+
+
+    }
 }
