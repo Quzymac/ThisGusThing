@@ -558,9 +558,9 @@ MonoBehaviour:
   JumpGFX: {fileID: 1219858690603372}
   JumpDownGFX: {fileID: 1870752630983016}
   JumpUpGFX: {fileID: 1782546446449000}
-  jumpAudio: {fileID: 8300000, guid: dc4e6c5ded10e46d49d6902c469f30a8, type: 3}
-  doubleJumpAudio: {fileID: 8300000, guid: d94797f4da6ca4b72b7b34a37d37ddcd, type: 3}
-  landAudio: {fileID: 8300000, guid: 85575e38fe35d49718bd0469f0facdbd, type: 3}
+  jumpAudio: {fileID: 8300000, guid: 600033fa6ab2b17429e8749bffe3e8e0, type: 3}
+  doubleJumpAudio: {fileID: 8300000, guid: e0e7c29f50157714b94366e9573d7d22, type: 3}
+  landAudio: {fileID: 8300000, guid: 7794fb432e25a9b4f92821f7035b3b26, type: 3}
   airJumps: 0
   maxAirJumps: 0
   mutations: {fileID: 0}
