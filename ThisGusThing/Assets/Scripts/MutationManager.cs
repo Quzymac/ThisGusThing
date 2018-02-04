@@ -8,7 +8,7 @@ public class MutationManager : MonoBehaviour {
     //Borde denna vara här...? Oklart.
     [SerializeField] Text currencyTextBox;
 
-    [SerializeField] int mutationCurrency = 3;
+    [SerializeField] int mutationCurrency = 0;
     [SerializeField] GameObject gus;
 
     [Header("Tier1Ability")]
@@ -22,10 +22,26 @@ public class MutationManager : MonoBehaviour {
     [SerializeField] bool tier1Upgraded = false;
     [SerializeField] bool tier2Upgraded = false;
 
+    [Header("Mutation Manager Panel")]
+    [SerializeField]
+    GameObject MMPanel;
+    [SerializeField]
+    GameObject MMExitButton;
+    [SerializeField]
+    GameObject MMOpenPanel;
+
+    UIManager myUIManager;
+
+    private int currentTier;
+
     private void Start()
     {
-        currencyTextBox.text = mutationCurrency.ToString();
+        myUIManager = this.GetComponent<UIManager>();
 
+        currencyTextBox.text = mutationCurrency.ToString();
+        currentTier = 0;
+        MMPanel.SetActive(false);
+        MMOpenPanel.SetActive(false);
     }
 
     public bool DoubleJump
@@ -48,17 +64,30 @@ public class MutationManager : MonoBehaviour {
         }
     }
 
+    public bool TripleJump
+    {
+        get
+        {
+            return tripleJump;
+        }
+        private set
+        {
+            tripleJump = value;
+        }
+    }
+
     //Tier1
     public void ActivateDoubleJump()
     {
-        if (doubleJump)
+        if (doubleJump)  
         { return; }
-        if(mutationCurrency > 0 && !tier1Upgraded && !tier2Upgraded)
+        if(mutationCurrency > 0 && !tier1Upgraded && !tier2Upgraded) 
         {
             gus.GetComponent<GusMovement2>().SetAirJumps(1);
+            
             if (!doubleJump)
             {
-                mutationCurrency--;
+                LoseMutationCurrency();
                 currencyTextBox.text = mutationCurrency.ToString();
                 doubleJump = true;
                 tier1Upgraded = true;
@@ -79,7 +108,7 @@ public class MutationManager : MonoBehaviour {
 
             if (!tier2Upgraded)
             {
-                mutationCurrency--;
+                LoseMutationCurrency();
                 currencyTextBox.text = mutationCurrency.ToString();
                 tier2Upgraded = true;
             }
@@ -98,7 +127,7 @@ public class MutationManager : MonoBehaviour {
 
             if (!tier2Upgraded)
             {
-                mutationCurrency--;
+                LoseMutationCurrency();
                 currencyTextBox.text = mutationCurrency.ToString();
                 tier2Upgraded = true;
             }
@@ -109,6 +138,42 @@ public class MutationManager : MonoBehaviour {
     {
         mutationCurrency++;
         currencyTextBox.text = mutationCurrency.ToString();
+
+        if (currentTier == 0)
+        {
+            currentTier++;
+        }
+
+        print("Current tier is tier " + currentTier);
+        TimeToMutate();
+    }
+
+    public void LoseMutationCurrency()
+    {
+        mutationCurrency--;
+        if (mutationCurrency == 0 && MMPanel.activeInHierarchy)
+        {
+            MMExitButton.SetActive(true);
+        }
+    }
+
+    public void MMPanelOpen()
+    {
+        MMOpenPanel.SetActive(true);
+    }
+
+    public void TimeToMutate()
+    {
+        MMPanel.SetActive(true);
+        myUIManager.SetButtonActive();
+        Time.timeScale = 0;
+        MMExitButton.SetActive(false);
+    }
+
+    public void MutationDone()
+    {
+        MMPanel.SetActive(false);
+        Time.timeScale = 1;
     }
 
 }

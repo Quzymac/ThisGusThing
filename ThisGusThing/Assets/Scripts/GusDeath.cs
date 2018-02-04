@@ -7,7 +7,7 @@ public class GusDeath : MonoBehaviour
     [Header("My Checkpoint")]
     [SerializeField] GameObject checkPoint;
     [SerializeField] GameObject gus;
-
+    [SerializeField] MutationManager myMutationManager;
     Vector3 checkPointCoordinates;
 
     private void Start()
@@ -15,7 +15,6 @@ public class GusDeath : MonoBehaviour
         checkPointCoordinates = checkPoint.transform.position;
     }
    
-
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Danger")
@@ -26,21 +25,27 @@ public class GusDeath : MonoBehaviour
             StartCoroutine(Die());
         }
 
-        if (col.gameObject.tag == "Checkpoint")
+        if (col.gameObject.tag == "Checkpoint")   // This prints two times for some fucking reason. Same for DANGER DANGER?
         {
             checkPoint = col.gameObject;  // Set new checkpoint.
             print("New checkpoint!" + checkPointCoordinates);
         }
     }
-   IEnumerator Die()
+
+    private void OnTriggerStay(Collider colliderino)
+    {
+        if (colliderino.gameObject.tag == "Checkpoint" && colliderino.gameObject.name != "CheckPoint1")
+        {
+            myMutationManager.MMPanelOpen(); // As long as Gus is inside the Checkpoint area, the panel is active. Should disappear when he's not. It doesn't. Why?
+        }
+    }
+
+    IEnumerator Die()
     {
         yield return new WaitForSeconds(3);
         
         this.transform.position = checkPointCoordinates;
         gus.GetComponent<Rigidbody>().isKinematic = false;
         gus.GetComponent<GusMovement2>().enabled = true;
-
-
-
     }
 }
