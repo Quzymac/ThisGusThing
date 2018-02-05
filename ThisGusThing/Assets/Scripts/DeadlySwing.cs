@@ -5,8 +5,6 @@ using UnityEngine;
 public class DeadlySwing : MonoBehaviour {
 
    [SerializeField] GameObject rotationPoint;
-    [SerializeField] GameObject flipPoint;
-
 
     [SerializeField] float speed = 3f;
     [SerializeField] float swingAmount = 0.7f;
@@ -19,14 +17,8 @@ public class DeadlySwing : MonoBehaviour {
     void Update()
     {
         Quaternion a = startPos;
-
-
+        
         a.z += swingAmount * Mathf.Sin(Time.time * speed);
         rotationPoint.transform.rotation = a;
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        print("yukjb");
-    }
-
 }

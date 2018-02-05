@@ -38,9 +38,9 @@ GameObject:
   - component: {fileID: 4534272835241566}
   - component: {fileID: 33235893951165022}
   - component: {fileID: 23241592735043550}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MaceGFX
-  m_TagString: Untagged
+  m_TagString: Danger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4849619258069422}
   - component: {fileID: 54487072797008286}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: RotationPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 54575022163852250}
   - component: {fileID: 65930348777160660}
   - component: {fileID: 59590612960453542}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,11 +89,10 @@ GameObject:
   - component: {fileID: 4546910514895586}
   - component: {fileID: 54197467910802656}
   - component: {fileID: 59749476522948634}
-  - component: {fileID: 114656687477140164}
   - component: {fileID: 135501871155389082}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Mace
-  m_TagString: Untagged
+  m_TagString: Danger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,7 +107,7 @@ GameObject:
   - component: {fileID: 4854929067084722}
   - component: {fileID: 33249926322227838}
   - component: {fileID: 23211443341617800}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: ArmGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +123,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4490853667328480}
   - component: {fileID: 65475726432088316}
-  m_Layer: 8
+  - component: {fileID: 114058649368241314}
+  m_Layer: 0
   m_Name: DeadlySwing
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1995525886307188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25, y: 3, z: 0}
+  m_LocalPosition: {x: 209, y: 9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4849619258069422}
@@ -488,19 +488,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: -0.000000022351742, z: 0}
---- !u!114 &114656687477140164
+--- !u!114 &114058649368241314
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1679345355286652}
+  m_GameObject: {fileID: 1995525886307188}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e0362c6f33ffa240a66981abfbb4da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationPoint: {fileID: 1411756702375124}
-  flipPoint: {fileID: 0}
   speed: 3
   swingAmount: 0.7
 --- !u!135 &135501871155389082

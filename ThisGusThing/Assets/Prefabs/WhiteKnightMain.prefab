@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 135644017952193508}
   - component: {fileID: 114340971306171476}
   - component: {fileID: 54176738064341258}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WhiteKnightMain
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33219299459109648}
   - component: {fileID: 23278364257354448}
   - component: {fileID: 95117732132215482}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WhiteKnight1.0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1691139278351336}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.78, y: -7.29, z: 0}
+  m_LocalPosition: {x: 153, y: -20.48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4804135853450348}
