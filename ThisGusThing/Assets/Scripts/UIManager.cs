@@ -45,7 +45,8 @@ public class UIManager : MonoBehaviour {
                 buttons.interactable = false; // the others, no.
             }
         }
-        else if(myMutationManager.DoubleJump) // if we DO have doublejump...
+
+        else if(myMutationManager.DoubleJump && myMutationManager.GetCurrentMutationCurrency() != 0) // if we DO have doublejump and we have currency...
         {
             print("We have double jump!");
 
@@ -68,6 +69,19 @@ public class UIManager : MonoBehaviour {
                 tier2TripleJump.interactable = true;
             }
         }
+
+        else if (myMutationManager.GetCurrentMutationCurrency() == 0) // if we DON'T have currency (when we enter a checkpoint)
+        {
+            foreach (Button buttons in tier1)
+            {
+                buttons.interactable = false; 
+            }
+
+            foreach (Button buttons in tier2)
+            {
+                buttons.interactable = false; 
+            }
+        }          
     }
 
     public void ButtonIsClicked(Button clickedButton) // Activates when player chooses power. 

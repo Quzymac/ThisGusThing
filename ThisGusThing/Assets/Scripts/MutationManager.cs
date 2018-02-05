@@ -157,9 +157,19 @@ public class MutationManager : MonoBehaviour {
         }
     }
 
+    public int GetCurrentMutationCurrency()
+    {
+        return mutationCurrency;
+    }
+
     public void MMPanelOpen()
     {
         MMOpenPanel.SetActive(true);
+    }
+
+    public void MMPanelClose()
+    {
+        MMOpenPanel.SetActive(false);
     }
 
     public void TimeToMutate()

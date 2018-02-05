@@ -32,11 +32,19 @@ public class GusDeath : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider colliderino)
+    private void OnTriggerStay(Collider checkpoint)
     {
-        if (colliderino.gameObject.tag == "Checkpoint" && colliderino.gameObject.name != "CheckPoint1")
+        if (checkpoint.gameObject.tag == "Checkpoint" && checkpoint.gameObject.name != "Checkpoint1")
         {
-            myMutationManager.MMPanelOpen(); // As long as Gus is inside the Checkpoint area, the panel is active. Should disappear when he's not. It doesn't. Why?
+            myMutationManager.MMPanelOpen();
+        }
+    }
+
+    private void OnTriggerExit(Collider colliderino)
+    {
+        if (colliderino.gameObject.tag == "Checkpoint" && colliderino.gameObject.name != "Checkpoint1")
+        {
+            myMutationManager.MMPanelClose();
         }
     }
 
