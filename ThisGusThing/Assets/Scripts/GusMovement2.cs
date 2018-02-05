@@ -17,7 +17,8 @@ public class GusMovement2 : MonoBehaviour
     bool isFalling = false;
 
     [Header("GameObjects")]
-    [SerializeField] GameObject playerModel;
+    [SerializeField]
+    GameObject playerModel;
     [SerializeField] GameObject defaultModel;
     [SerializeField] GameObject JumpGFX;
     [SerializeField] GameObject JumpDownGFX;
@@ -46,16 +47,19 @@ public class GusMovement2 : MonoBehaviour
 
     [SerializeField] MutationManager mutations;
 
+    [SerializeField] bool isded;
+
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
         moveSFX = GetComponent<AudioSource>();
+        isded = false;
     }
 
     void Update()
     {
-        if(mutations.SuperSpeed)
+        if (mutations.SuperSpeed)
         {
             if (Input.GetButton("Fire3"))
                 moveSpeed = 20f;
@@ -75,7 +79,7 @@ public class GusMovement2 : MonoBehaviour
             isFalling = false;
         }
 
-        if (Input.GetButtonDown("Jump") && airJumps > 0 && !controller.isGrounded)
+        if (Input.GetButtonDown("Jump") && airJumps > 0 && !controller.isGrounded && !isded)
         {
             moveSFX.clip = doubleJumpAudio;
             moveSFX.Play();
@@ -95,7 +99,7 @@ public class GusMovement2 : MonoBehaviour
 
 
             verticalVelocity = -gravity * Time.deltaTime;
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && !isded)
             {
                 defaultModel.SetActive(false);
                 JumpGFX.SetActive(true);
@@ -126,41 +130,45 @@ public class GusMovement2 : MonoBehaviour
             verticalVelocity -= gravity * (fallMultiplier - 1) * Time.deltaTime;
         }
 
-        Vector3 moveVector = Vector3.zero;
-        moveVector.x = Input.GetAxis("Horizontal") * moveSpeed;
-        moveVector.y = verticalVelocity;
-        controller.Move(moveVector * Time.deltaTime);
-
-        float h = Input.GetAxis("Horizontal");
-
-        if (h > 0 && !facingRight) //d
+        if (!isded)
         {
-            targetRotation = Quaternion.Euler(0, 0, 0);
-            facingRight = true;
-            rotating = true;
-            rotationTime = 0;
-        }
+            Vector3 moveVector = Vector3.zero;
 
-        else if (h < 0 && facingRight) //a
-        {
-            targetRotation = Quaternion.Euler(0, -180, 0);
-            facingRight = false;
-            rotating = true;
-            rotationTime = 0;
-        }
+            moveVector.x = Input.GetAxis("Horizontal") * moveSpeed;
+            moveVector.y = verticalVelocity;
+            controller.Move(moveVector * Time.deltaTime);
 
-        if (rotating)
-        {
-            rotationTime += Time.deltaTime * rotationSpeed;
-            playerModel.transform.rotation = Quaternion.Lerp(playerModel.transform.rotation, targetRotation, rotationTime);
+            float h = Input.GetAxis("Horizontal");
 
-            if (rotationTime > 1)
+            if (h > 0 && !facingRight) //d
             {
-                rotating = false;
+                targetRotation = Quaternion.Euler(0, 0, 0);
+                facingRight = true;
+                rotating = true;
+                rotationTime = 0;
+            }
+
+            else if (h < 0 && facingRight) //a
+            {
+                targetRotation = Quaternion.Euler(0, -180, 0);
+                facingRight = false;
+                rotating = true;
+                rotationTime = 0;
+            }
+
+            if (rotating)
+            {
+                rotationTime += Time.deltaTime * rotationSpeed;
+                playerModel.transform.rotation = Quaternion.Lerp(playerModel.transform.rotation, targetRotation, rotationTime);
+
+                if (rotationTime > 1)
+                {
+                    rotating = false;
+                }
             }
         }
-        
-        if (JumpGFX.activeInHierarchy && verticalVelocity< 0)
+
+        if (JumpGFX.activeInHierarchy && verticalVelocity < 0)
         {
             JumpUpGFX.SetActive(false);
             JumpDownGFX.SetActive(true);
@@ -170,7 +178,7 @@ public class GusMovement2 : MonoBehaviour
             JumpUpGFX.SetActive(true);
             JumpDownGFX.SetActive(false);
         }
-        else if(playerModel.activeInHierarchy && verticalVelocity< -1.5f)
+        else if (playerModel.activeInHierarchy && verticalVelocity < -1.5f)
         {
             defaultModel.SetActive(false);
             JumpGFX.SetActive(true);
@@ -180,4 +188,10 @@ public class GusMovement2 : MonoBehaviour
     {
         maxAirJumps = jumps;
     }
+
+    public void SetIsDed(bool isgusded)
+    {
+        isded = isgusded; 
+    }
 }
+        

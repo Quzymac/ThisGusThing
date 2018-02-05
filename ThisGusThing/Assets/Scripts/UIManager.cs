@@ -13,7 +13,8 @@ public class UIManager : MonoBehaviour {
     [Header("Tier 2 buttons")]
     [SerializeField]
     Button tier2SuperSpeed;
-    [SerializeField] Button tier2TripleJump;
+    [SerializeField]
+    Button tier2TripleJump;
 
     private List<Button> tier1 = new List<Button>();
     private List<Button> tier2 = new List<Button>();
@@ -35,14 +36,29 @@ public class UIManager : MonoBehaviour {
         if(myMutationManager.DoubleJump == false) // if we don't have doublejump yet...
         {
             print("We don't have double jump yet!");
-            foreach (Button buttons in tier1)
+            if (myMutationManager.GetCurrentMutationCurrency() == 0)
             {
-                buttons.interactable = true; // set it to active.
-            }
+                foreach (Button buttons in tier1)
+                {
+                    buttons.interactable = false;
+                }
 
-            foreach (Button buttons in tier2)
+                foreach (Button buttons in tier2)
+                {
+                    buttons.interactable = false;
+                }
+            }
+            else
             {
-                buttons.interactable = false; // the others, no.
+                foreach (Button buttons in tier1)
+                {
+                    buttons.interactable = true; // set it to active.
+                }
+
+                foreach (Button buttons in tier2)
+                {
+                    buttons.interactable = false; // the others, no.
+                }
             }
         }
 
@@ -72,6 +88,7 @@ public class UIManager : MonoBehaviour {
 
         else if (myMutationManager.GetCurrentMutationCurrency() == 0) // if we DON'T have currency (when we enter a checkpoint)
         {
+            print("Bitch we broke");
             foreach (Button buttons in tier1)
             {
                 buttons.interactable = false; 
@@ -89,13 +106,19 @@ public class UIManager : MonoBehaviour {
         if (clickedButton.name.Contains("Tier1"))
         {
             clickedButton.interactable = false;
-            //clickedButton.GetComponent<Image>().color = Color.green;
         }
 
         if (clickedButton.name.Contains("Tier2"))
         {
             clickedButton.interactable = false;
-            //clickedButton.GetComponent<Image>().color = Color.green;
+            if (clickedButton.name == ("Tier2SuperSpeed") && tier2TripleJump.interactable == false)
+            {
+                tier2TripleJump.interactable = true;
+            }
+            if (clickedButton.name == ("Tier2TripleJump") && tier2SuperSpeed.interactable == false)
+            {
+                tier2SuperSpeed.interactable = true;
+            }
         }
     }
 }

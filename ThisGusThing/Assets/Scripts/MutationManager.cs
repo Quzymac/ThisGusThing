@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MutationManager : MonoBehaviour {
 
     //Borde denna vara här...? Oklart.
-    [SerializeField] Text currencyTextBox;
+    [SerializeField] Text currencyTextBox; // Ta bort denna när vi kan. 
 
     [SerializeField] int mutationCurrency = 0;
     [SerializeField] GameObject gus;
@@ -177,7 +177,14 @@ public class MutationManager : MonoBehaviour {
         MMPanel.SetActive(true);
         myUIManager.SetButtonActive();
         Time.timeScale = 0;
-        MMExitButton.SetActive(false);
+        if (mutationCurrency == 0)
+        {
+            MMExitButton.SetActive(true);
+        }
+        else
+        {
+            MMExitButton.SetActive(false);
+        }
     }
 
     public void MutationDone()
