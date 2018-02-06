@@ -38,6 +38,7 @@ public class GusDeath : MonoBehaviour
             if (isColliding) return;
             isColliding = true;
             checkPoint = col.gameObject;  // Set new checkpoint.
+            checkPointCoordinates = checkPoint.transform.position;
             print("New checkpoint!" + checkPointCoordinates);
         }
     }
