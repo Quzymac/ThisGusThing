@@ -10,17 +10,13 @@ public class GusDeath : MonoBehaviour
     [SerializeField] MutationManager myMutationManager;
     Vector3 checkPointCoordinates;
 
-    CharacterController myCharacterController;
-    
     bool isColliding = false; // Because Gus has two colliders, we need him to NOT collide two times with things. That'd be silly.
 
     private void Start()
     {
         checkPointCoordinates = checkPoint.transform.position;
-        myCharacterController = this.GetComponent<CharacterController>();
-
     }
-   
+
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Danger")
@@ -45,7 +41,7 @@ public class GusDeath : MonoBehaviour
 
     private void OnTriggerStay(Collider checkpoint)
     {
-        if (checkpoint.gameObject.tag == "Checkpoint" && checkpoint.gameObject.name != "CheckPoint1")
+        if (checkpoint.gameObject.tag == "Checkpoint" && checkpoint.gameObject.name != "CheckPoint")
         {
             myMutationManager.MMPanelOpen();
         }
@@ -53,7 +49,7 @@ public class GusDeath : MonoBehaviour
 
     private void OnTriggerExit(Collider colliderino)
     {
-        if (colliderino.gameObject.tag == "Checkpoint" && colliderino.gameObject.name != "CheckPoint1")
+        if (colliderino.gameObject.tag == "Checkpoint" && colliderino.gameObject.name != "CheckPoint")
         {
             myMutationManager.MMPanelClose();
             isColliding = false;

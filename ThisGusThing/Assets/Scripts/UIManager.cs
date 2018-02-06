@@ -84,21 +84,7 @@ public class UIManager : MonoBehaviour {
                 tier2SuperSpeed.interactable = true;
                 tier2TripleJump.interactable = true;
             }
-        }
-
-        else if (myMutationManager.GetCurrentMutationCurrency() == 0) // if we DON'T have currency (when we enter a checkpoint)
-        {
-            print("Bitch we broke");
-            foreach (Button buttons in tier1)
-            {
-                buttons.interactable = false; 
-            }
-
-            foreach (Button buttons in tier2)
-            {
-                buttons.interactable = false; 
-            }
-        }          
+        }       
     }
 
     public void ButtonIsClicked(Button clickedButton) // Activates when player chooses power. 

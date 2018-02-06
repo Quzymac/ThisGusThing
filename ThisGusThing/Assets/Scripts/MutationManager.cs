@@ -137,6 +137,7 @@ public class MutationManager : MonoBehaviour {
     public void PickUpMutationCurrency()
     {
         mutationCurrency++;
+        print("Current currency is " + mutationCurrency.ToString());
         currencyTextBox.text = mutationCurrency.ToString();
 
         if (currentTier == 0)
@@ -144,13 +145,13 @@ public class MutationManager : MonoBehaviour {
             currentTier++;
         }
 
-        print("Current tier is tier " + currentTier);
         TimeToMutate();
     }
 
     public void LoseMutationCurrency()
     {
         mutationCurrency--;
+        print("Current currency is" + mutationCurrency.ToString());
         if (mutationCurrency == 0 && MMPanel.activeInHierarchy)
         {
             MMExitButton.SetActive(true);
