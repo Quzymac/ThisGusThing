@@ -26,9 +26,12 @@ public class GusMovement2 : MonoBehaviour
 
     [Header("Audio")]
     AudioSource moveSFX;
+
     [SerializeField] AudioClip jumpAudio;
     [SerializeField] AudioClip doubleJumpAudio;
     [SerializeField] AudioClip landAudio;
+    [SerializeField] AudioClip superSpeedAudio;
+    bool superSpeedSoundPlaying = false;
 
     //Rotations
     float rotationTime;
@@ -50,10 +53,12 @@ public class GusMovement2 : MonoBehaviour
     [SerializeField] bool isded;
 
 
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
         moveSFX = GetComponent<AudioSource>();
+
         isded = false;
     }
 
@@ -61,10 +66,21 @@ public class GusMovement2 : MonoBehaviour
     {
         if (mutations.SuperSpeed)
         {
+
             if (Input.GetButton("Fire3"))
+            {
                 moveSpeed = 20f;
+                if (!superSpeedSoundPlaying)
+                {
+                    moveSFX.PlayOneShot(superSpeedAudio, 0.1f);
+                    superSpeedSoundPlaying = true;
+                    StartCoroutine(SuperSpeedAudioCountdown(superSpeedAudio));
+                }
+            }
             else
+            {
                 moveSpeed = 10f;
+            }
         }
 
         if (verticalVelocity < -2.5f)
@@ -74,15 +90,13 @@ public class GusMovement2 : MonoBehaviour
 
         if (controller.isGrounded && isFalling)
         {
-            moveSFX.clip = landAudio;
-            moveSFX.Play();
+            moveSFX.PlayOneShot(landAudio);
             isFalling = false;
         }
 
         if (Input.GetButtonDown("Jump") && airJumps > 0 && !controller.isGrounded && !isded)
         {
-            moveSFX.clip = doubleJumpAudio;
-            moveSFX.Play();
+            moveSFX.PlayOneShot(doubleJumpAudio);
             isFalling = true;
             doubleJump = false;
             airJumps--;
@@ -103,8 +117,7 @@ public class GusMovement2 : MonoBehaviour
             {
                 defaultModel.SetActive(false);
                 JumpGFX.SetActive(true);
-                moveSFX.clip = jumpAudio;
-                moveSFX.Play();
+                moveSFX.PlayOneShot(jumpAudio);
                 isFalling = true;
 
                 verticalVelocity = jumpForce;
@@ -192,6 +205,11 @@ public class GusMovement2 : MonoBehaviour
     public void SetIsDed(bool isgusded)
     {
         isded = isgusded; 
+    }
+    IEnumerator SuperSpeedAudioCountdown(AudioClip audio)
+    {
+        yield return new WaitForSeconds(audio.length - 0.2f);
+        superSpeedSoundPlaying = false;
     }
 }
         

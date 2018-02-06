@@ -45,12 +45,11 @@ public class PickUpMutationCurrency : MonoBehaviour {
     {
         AudioSource audio = GetComponent<AudioSource>();
 
-        audio.clip = pickUpSFX;
-        audioLenght = audio.clip.length;
+        audioLenght = pickUpSFX.length;
         scaling = true;
-        audio.Play();
+        audio.PlayOneShot(pickUpSFX);
 
-        yield return new WaitForSeconds(audio.clip.length);
+        yield return new WaitForSeconds(audioLenght);
         Destroy(this.gameObject);
     }
 }
