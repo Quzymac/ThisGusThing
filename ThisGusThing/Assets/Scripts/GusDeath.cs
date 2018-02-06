@@ -3,18 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GusDeath : MonoBehaviour
-    {
+{
     [Header("My Checkpoint")]
-    [SerializeField] GameObject checkPoint;
+    [SerializeField]
+    GameObject checkPoint;
     [SerializeField] GameObject gus;
     [SerializeField] MutationManager myMutationManager;
     Vector3 checkPointCoordinates;
+
+    [SerializeField] float respawnTime = 3f;
+
+    bool dead = false;
 
     bool isColliding = false; // Because Gus has two colliders, we need him to NOT collide two times with things. That'd be silly.
 
     private void Start()
     {
         checkPointCoordinates = checkPoint.transform.position;
+
+    }
+    private void Update()
+    {
+        if (dead)
+        {
+            StartCoroutine(Die());
+        }
     }
 
     private void OnTriggerEnter(Collider col)
@@ -24,9 +37,8 @@ public class GusDeath : MonoBehaviour
             if (isColliding) return;
             isColliding = true;
             print("DANGER DANGER!");
-            gus.GetComponent<Rigidbody>().isKinematic = true;
-            gus.GetComponent<GusMovement2>().SetIsDed(true);
-            StartCoroutine(Die());
+
+            dead = true;
         }
 
         if (col.gameObject.tag == "Checkpoint")
@@ -58,11 +70,19 @@ public class GusDeath : MonoBehaviour
 
     IEnumerator Die()
     {
-        yield return new WaitForSeconds(3);     
+        print("hh");
+        dead = false;
+        GetComponent<Rigidbody>().isKinematic = true;
+        GetComponent<GusMovement2>().SetIsDed(true);
+
+        yield return new WaitForSeconds(3);
+
         this.transform.position = checkPointCoordinates;
-        gus.GetComponent<GusMovement2>().SetIsDed(false);
-        gus.GetComponent<Rigidbody>().isKinematic = false;
-        //gus.GetComponent<GusMovement2>().enabled = true;
+        GetComponent<GusMovement2>().SetIsDed(false);
+        GetComponent<Rigidbody>().isKinematic = false;
+
         isColliding = false;
+
+
     }
 }
