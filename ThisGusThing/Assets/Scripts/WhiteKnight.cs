@@ -6,7 +6,6 @@ public class WhiteKnight : MonoBehaviour {
 
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float raycastLength;
-    bool hitObject = false;
 
     [SerializeField] GameObject graficsModel;
     float rotationTime;
@@ -22,11 +21,13 @@ public class WhiteKnight : MonoBehaviour {
         transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
 
             Vector3 right = transform.TransformDirection(Vector3.right);
-            if (hitObject == false && Physics.Raycast(transform.position, right, raycastLength))
+            if (Physics.Raycast(transform.position, right, raycastLength))
             {
-                hitObject = false;
-                targetRotation = Quaternion.Euler(0, 270, 0);
                 facingRight = false;
+            }
+            if (Physics.Raycast(transform.position, right, raycastLength + 1.3f))
+            {
+                targetRotation = Quaternion.Euler(0, 270, 0);
                 rotating = true;
                 rotationTime = 0;
             }
@@ -36,11 +37,13 @@ public class WhiteKnight : MonoBehaviour {
             transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
 
             Vector3 left = transform.TransformDirection(Vector3.left);
-            if (hitObject == false && Physics.Raycast(transform.position, left, raycastLength))
+            if (Physics.Raycast(transform.position, left, raycastLength))
             {
-                hitObject = false;
-                targetRotation = Quaternion.Euler(0, 90, 0);
                 facingRight = true;
+            }
+            if (Physics.Raycast(transform.position, left, raycastLength + 1.3f))
+            {
+                targetRotation = Quaternion.Euler(0, 90, 0);
                 rotating = true;
                 rotationTime = 0;
             }

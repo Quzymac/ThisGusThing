@@ -53,7 +53,7 @@ public class GusDeath : MonoBehaviour
 
     private void OnTriggerStay(Collider checkpoint)
     {
-        if (checkpoint.gameObject.tag == "Checkpoint" && checkpoint.gameObject.name != "CheckPoint")
+        if (checkpoint.gameObject.tag == "Checkpoint")// && checkpoint.gameObject.name != "CheckPoint")
         {
             myMutationManager.MMPanelOpen();
         }
@@ -61,7 +61,7 @@ public class GusDeath : MonoBehaviour
 
     private void OnTriggerExit(Collider colliderino)
     {
-        if (colliderino.gameObject.tag == "Checkpoint" && colliderino.gameObject.name != "CheckPoint")
+        if (colliderino.gameObject.tag == "Checkpoint")// && colliderino.gameObject.name != "CheckPoint")
         {
             myMutationManager.MMPanelClose();
             isColliding = false;
