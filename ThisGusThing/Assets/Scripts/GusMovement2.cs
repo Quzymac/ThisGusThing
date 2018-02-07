@@ -23,6 +23,11 @@ public class GusMovement2 : MonoBehaviour
     [SerializeField] GameObject JumpGFX;
     [SerializeField] GameObject JumpDownGFX;
     [SerializeField] GameObject JumpUpGFX;
+    [SerializeField] GameObject IdleGFX;
+    [SerializeField] GameObject runningGFX;
+    [SerializeField] RuntimeAnimatorController runningAnim;
+    [SerializeField] RuntimeAnimatorController walkingAnim;
+
 
     [Header("Audio")]
     AudioSource moveSFX;
@@ -67,9 +72,11 @@ public class GusMovement2 : MonoBehaviour
         if (mutations.SuperSpeed)
         {
 
+
             if (Input.GetButton("Fire3"))
             {
                 moveSpeed = 20f;
+                runningGFX.GetComponent<Animator>().runtimeAnimatorController = runningAnim;
                 if (!superSpeedSoundPlaying)
                 {
                     moveSFX.PlayOneShot(superSpeedAudio, 0.1f);
@@ -80,10 +87,12 @@ public class GusMovement2 : MonoBehaviour
             else
             {
                 moveSpeed = 10f;
+                runningGFX.GetComponent<Animator>().runtimeAnimatorController = walkingAnim;
+
             }
         }
 
-        if (verticalVelocity < -2.5f)
+        if (verticalVelocity < -3.5f)
         {
             isFalling = true;
         }
@@ -107,6 +116,16 @@ public class GusMovement2 : MonoBehaviour
         {
             defaultModel.SetActive(true);
             JumpGFX.SetActive(false);
+            if(Input.GetAxis("Horizontal") == 0)
+            {
+                IdleGFX.SetActive(true);
+                runningGFX.SetActive(false);
+            }
+            else
+            {
+                IdleGFX.SetActive(false);
+                runningGFX.SetActive(true);
+            }
 
             doubleJump = true;
             airJumps = maxAirJumps;
@@ -151,7 +170,14 @@ public class GusMovement2 : MonoBehaviour
             moveVector.y = verticalVelocity;
             controller.Move(moveVector * Time.deltaTime);
 
+            
             float h = Input.GetAxis("Horizontal");
+
+            if(h != 0 && controller.isGrounded)
+            {
+                defaultModel.SetActive(true);
+                IdleGFX.SetActive(false);
+            }
 
             if (h > 0 && !facingRight) //d
             {
@@ -191,7 +217,7 @@ public class GusMovement2 : MonoBehaviour
             JumpUpGFX.SetActive(true);
             JumpDownGFX.SetActive(false);
         }
-        else if (playerModel.activeInHierarchy && verticalVelocity < -1.5f)
+        else if (playerModel.activeInHierarchy && verticalVelocity < -3f)
         {
             defaultModel.SetActive(false);
             JumpGFX.SetActive(true);

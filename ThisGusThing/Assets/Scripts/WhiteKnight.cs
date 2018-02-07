@@ -27,7 +27,7 @@ public class WhiteKnight : MonoBehaviour {
             }
             if (Physics.Raycast(transform.position, right, raycastLength + 1.3f))
             {
-                targetRotation = Quaternion.Euler(0, 270, 0);
+                targetRotation = Quaternion.Euler(0, 180, 0);
                 rotating = true;
                 rotationTime = 0;
             }
@@ -43,7 +43,7 @@ public class WhiteKnight : MonoBehaviour {
             }
             if (Physics.Raycast(transform.position, left, raycastLength + 1.3f))
             {
-                targetRotation = Quaternion.Euler(0, 90, 0);
+                targetRotation = Quaternion.Euler(0, 0, 0);
                 rotating = true;
                 rotationTime = 0;
             }

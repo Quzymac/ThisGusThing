@@ -15,6 +15,11 @@ public class SceneHandlerScript : MonoBehaviour {
         SceneManager.LoadScene("TitleScene");
     }
 
+    public void ChangeSceneToCredits()
+    {
+        SceneManager.LoadScene("EndCredits");
+    }
+
     public void ExitGame()
     {
         Application.Quit(); 
