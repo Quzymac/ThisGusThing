@@ -16,6 +16,16 @@ public class UIManager : MonoBehaviour {
     [SerializeField]
     Button tier2TripleJump;
 
+    [Header("Sprites!")]
+    [SerializeField]
+    Sprite questionMarkSprite;
+    [SerializeField]
+    Sprite doubleJumpSprite;
+    [SerializeField]
+    Sprite tripleJumpSprite;
+    [SerializeField]
+    Sprite superSpeedSprite;
+
     private List<Button> tier1 = new List<Button>();
     private List<Button> tier2 = new List<Button>();
 
@@ -24,7 +34,6 @@ public class UIManager : MonoBehaviour {
     private void Start() 
     { 
         tier1.Add(tier1DoubleJump);
-
         tier2.Add(tier2TripleJump);
         tier2.Add(tier2SuperSpeed);
 
@@ -41,23 +50,27 @@ public class UIManager : MonoBehaviour {
                 foreach (Button buttons in tier1)
                 {
                     buttons.interactable = false;
+                    buttons.GetComponent<Image>().sprite = questionMarkSprite;
                 }
 
                 foreach (Button buttons in tier2)
                 {
                     buttons.interactable = false;
+                    buttons.GetComponent<Image>().sprite = questionMarkSprite;
                 }
             }
             else
             {
                 foreach (Button buttons in tier1)
                 {
-                    buttons.interactable = true; // set it to active.
+                    buttons.interactable = true;
+                    buttons.GetComponent<Image>().sprite = doubleJumpSprite;
                 }
 
                 foreach (Button buttons in tier2)
                 {
-                    buttons.interactable = false; // the others, no.
+                    buttons.interactable = false;
+                    buttons.GetComponent<Image>().sprite = questionMarkSprite;
                 }
             }
         }
@@ -65,6 +78,9 @@ public class UIManager : MonoBehaviour {
         else if(myMutationManager.DoubleJump && myMutationManager.GetCurrentMutationCurrency() != 0) // if we DO have doublejump and we have currency...
         {
             print("We have double jump!");
+            tier2SuperSpeed.GetComponent<Image>().sprite = superSpeedSprite;
+            tier2TripleJump.GetComponent<Image>().sprite = tripleJumpSprite;
+
 
             if (myMutationManager.SuperSpeed) // and we have Super Speed..
             {
@@ -96,14 +112,16 @@ public class UIManager : MonoBehaviour {
 
         if (clickedButton.name.Contains("Tier2"))
         {
+
             clickedButton.interactable = false;
+
             if (clickedButton.name == ("Tier2SuperSpeed") && tier2TripleJump.interactable == false)
             {
                 tier2TripleJump.interactable = true;
             }
             if (clickedButton.name == ("Tier2TripleJump") && tier2SuperSpeed.interactable == false)
             {
-                tier2SuperSpeed.interactable = true;
+                tier2SuperSpeed.interactable = true;      
             }
         }
     }
