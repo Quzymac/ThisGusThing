@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -208,10 +208,10 @@ RectTransform:
   m_Father: {fileID: 1233828579}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030518, y: 0}
-  m_SizeDelta: {x: 761, y: 338}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &802577933
 MonoBehaviour:
@@ -278,11 +278,11 @@ RectTransform:
   m_Father: {fileID: 1998715546}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 54.6, y: -1051.8}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 67, y: -1184}
   m_SizeDelta: {x: 80, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &974342810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,8 +401,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -116.5, y: -468.3595}
-  m_SizeDelta: {x: 527.9, y: 1274.8}
+  m_AnchoredPosition: {x: -116.5, y: -545.4}
+  m_SizeDelta: {x: 527.9, y: 1428.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1085168382
 MonoBehaviour:
@@ -450,12 +450,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Credits\n\nThis Gus Thing\nPrototype\n\nMade by the talented members\nof
-    \"Grill Squad\" (Group 7)\n\n\n\nGraphic Artists\n\n\n\nWilliam Pellas - Scrum
-    Master\n\nDenise Cordova Modin\r\n\r\nHanna Sundberg\r\n\r\nJennie Wu\r\n\n\n\nDesigners\n\n\n\nJohanna
-    Nilsson - Product Owner\n\r\nRuben Malmer\r\n \r\nViking Claesson\n\n\n\n\n\nThanks
-    for playing!\nSorry for the bugs.\n\n\n\nS\xF6dert\xF6rns H\xF6gskola\nSpelprogrammet,
-    SP17\n2018"
+  m_Text: "Congratulations, Gus! You successfully took over the human brain and saved
+    your species! Go you!\n\n\n\n\n\nCredits\n\nThis Gus Thing\nPrototype\n\nMade
+    by the talented members\nof \"Grill Squad\" (Group 7)\n\n\n\nGraphic Artists\n\n\n\nWilliam
+    Pellas - Scrum Master\n\nDenise Cordova Modin\r\n\r\nHanna Sundberg\r\n\r\nJennie
+    Wu\r\n\n\n\nDesigners\n\n\n\nJohanna Nilsson - Product Owner\n\r\nRuben Malmer\r\n
+    \r\nViking Claesson\n\n\n\n\n\nThanks for playing!\nSorry for the bugs.\n\n\n\nS\xF6dert\xF6rns
+    H\xF6gskola\nSpelprogrammet, SP17\n2018"
 --- !u!222 &1085168384
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -704,6 +705,7 @@ GameObject:
   - component: {fileID: 1831522482}
   - component: {fileID: 1831522481}
   - component: {fileID: 1831522480}
+  - component: {fileID: 1831522484}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -774,6 +776,86 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1831522484
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1831522479}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a86df96593dd85f43bbf892ee6282496, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &1998715545
 GameObject:
   m_ObjectHideFlags: 0
