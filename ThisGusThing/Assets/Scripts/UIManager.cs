@@ -31,6 +31,8 @@ public class UIManager : MonoBehaviour {
 
     MutationManager myMutationManager;
 
+    Sprite mySprite;
+
     private void Start() 
     { 
         tier1.Add(tier1DoubleJump);
@@ -38,28 +40,14 @@ public class UIManager : MonoBehaviour {
         tier2.Add(tier2SuperSpeed);
 
         myMutationManager = this.GetComponent<MutationManager>();
+
     }
 
     public void SetButtonActive()  // Activates when player gets an orb! BEFORE clicking a button.
     {
         if(myMutationManager.DoubleJump == false) // if we don't have doublejump yet...
         {
-            print("We don't have double jump yet!");
-            if (myMutationManager.GetCurrentMutationCurrency() == 0)
-            {
-                foreach (Button buttons in tier1)
-                {
-                    buttons.interactable = false;
-                    buttons.GetComponent<Image>().sprite = questionMarkSprite;
-                }
-
-                foreach (Button buttons in tier2)
-                {
-                    buttons.interactable = false;
-                    buttons.GetComponent<Image>().sprite = questionMarkSprite;
-                }
-            }
-            else
+            if (myMutationManager.GetCurrentMutationCurrency() != 0)
             {
                 foreach (Button buttons in tier1)
                 {
@@ -73,13 +61,16 @@ public class UIManager : MonoBehaviour {
                     buttons.GetComponent<Image>().sprite = questionMarkSprite;
                 }
             }
+
+            else
+                return;
         }
 
         else if(myMutationManager.DoubleJump && myMutationManager.GetCurrentMutationCurrency() != 0) // if we DO have doublejump and we have currency...
         {
             print("We have double jump!");
-            tier2SuperSpeed.GetComponent<Image>().sprite = superSpeedSprite;
-            tier2TripleJump.GetComponent<Image>().sprite = tripleJumpSprite;
+            tier2SuperSpeed.GetComponentInChildren<Image>().sprite = superSpeedSprite;
+            tier2TripleJump.GetComponentInChildren<Image>().sprite = tripleJumpSprite;
 
 
             if (myMutationManager.SuperSpeed) // and we have Super Speed..

@@ -36,6 +36,7 @@ public class GusMovement2 : MonoBehaviour
     [SerializeField] AudioClip doubleJumpAudio;
     [SerializeField] AudioClip landAudio;
     [SerializeField] AudioClip superSpeedAudio;
+    [SerializeField] AudioClip deathSplatAudio;
     bool superSpeedSoundPlaying = false;
 
     //Rotations
@@ -232,6 +233,12 @@ public class GusMovement2 : MonoBehaviour
     {
         isded = isgusded; 
     }
+
+    public void PlayDeathSplatSound()
+    {
+        moveSFX.PlayOneShot(deathSplatAudio);
+    }
+
     IEnumerator SuperSpeedAudioCountdown(AudioClip audio)
     {
         yield return new WaitForSeconds(audio.length - 0.2f);

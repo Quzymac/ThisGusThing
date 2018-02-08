@@ -9,6 +9,8 @@ public class GusDeath : MonoBehaviour
     GameObject checkPoint;
     [SerializeField] GameObject gus;
     [SerializeField] MutationManager myMutationManager;
+
+    GusMovement2 myGusMovement;
     Vector3 checkPointCoordinates;
 
     [SerializeField] float respawnTime = 3f;
@@ -20,7 +22,7 @@ public class GusDeath : MonoBehaviour
     private void Start()
     {
         checkPointCoordinates = checkPoint.transform.position;
-
+        myGusMovement = this.GetComponent<GusMovement2>();
     }
     private void Update()
     {
@@ -37,6 +39,7 @@ public class GusDeath : MonoBehaviour
             if (isColliding) return;
             isColliding = true;
             print("DANGER DANGER!");
+            print("Gus has collided AND DIED by" + col.name.ToString());
 
             dead = true;
         }
@@ -47,7 +50,7 @@ public class GusDeath : MonoBehaviour
             isColliding = true;
             checkPoint = col.gameObject;  // Set new checkpoint.
             checkPointCoordinates = checkPoint.transform.position;
-            print("New checkpoint!" + checkPointCoordinates);
+            //print("New checkpoint!" + checkPointCoordinates);
         }
     }
 
@@ -72,6 +75,7 @@ public class GusDeath : MonoBehaviour
     {
         print("hh");
         dead = false;
+        myGusMovement.PlayDeathSplatSound();
         GetComponent<Rigidbody>().isKinematic = true;
         GetComponent<GusMovement2>().SetIsDed(true);
 
@@ -82,7 +86,5 @@ public class GusDeath : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = false;
 
         isColliding = false;
-
-
     }
 }
