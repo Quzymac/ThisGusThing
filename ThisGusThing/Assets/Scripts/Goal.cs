@@ -22,7 +22,7 @@ public class Goal : MonoBehaviour {
     IEnumerator Win()
     {
         AudioSource audio = GetComponent<AudioSource>();
-        audio.PlayOneShot(victorySound);
+        audio.PlayOneShot(victorySound, 1.6f);
         yield return new WaitForSeconds(victorySound.length);
         print("f");
         SceneManager.LoadScene("EndCredits");
