@@ -625,7 +625,6 @@ GameObject:
   - component: {fileID: 4288578527100388}
   - component: {fileID: 54959930607346170}
   - component: {fileID: 114315729558414382}
-  - component: {fileID: 135238446440146508}
   - component: {fileID: 143874440387493948}
   - component: {fileID: 82386444803362712}
   - component: {fileID: 114308666237351248}
@@ -4096,7 +4095,7 @@ MonoBehaviour:
   doubleJumpAudio: {fileID: 8300000, guid: e0e7c29f50157714b94366e9573d7d22, type: 3}
   landAudio: {fileID: 8300000, guid: 7794fb432e25a9b4f92821f7035b3b26, type: 3}
   superSpeedAudio: {fileID: 8300000, guid: a945d84fb05eb3741b63e148b5f66974, type: 3}
-  deathSplatAudio: {fileID: 0}
+  deathSplatAudio: {fileID: 8300000, guid: 5789a94f842c38a47bdc3df23f205f90, type: 3}
   airJumps: 0
   maxAirJumps: 0
   mutations: {fileID: 0}
@@ -4108,18 +4107,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1623131745411852}
   m_Enabled: 1
---- !u!135 &135238446440146508
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1339314599898756}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &137651158903963182
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
