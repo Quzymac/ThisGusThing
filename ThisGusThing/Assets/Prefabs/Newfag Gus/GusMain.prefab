@@ -4030,6 +4030,7 @@ MonoBehaviour:
   doubleJumpAudio: {fileID: 8300000, guid: e0e7c29f50157714b94366e9573d7d22, type: 3}
   landAudio: {fileID: 8300000, guid: 7794fb432e25a9b4f92821f7035b3b26, type: 3}
   superSpeedAudio: {fileID: 8300000, guid: a945d84fb05eb3741b63e148b5f66974, type: 3}
+  deathSplatAudio: {fileID: 0}
   airJumps: 0
   maxAirJumps: 0
   mutations: {fileID: 0}
